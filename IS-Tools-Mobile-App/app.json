@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "IS-Tools-Mobile-App",
-    "slug": "IS-Tools-Mobile-App",
-    "privacy": "public",
+    "name": "IS Tools Mobile",
+    "description": "Mobile app for inventory purposes.",
+    "slug": "IS-Tools-Mobile",
+    "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
@@ -14,7 +15,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#CF162C"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

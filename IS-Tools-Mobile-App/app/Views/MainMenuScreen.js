@@ -7,26 +7,14 @@ import TextInputBottomBorder from '../Components/TextInput';
 import ButtonTransparentBackground from '../Components/Button';
 
 
-class InventoryScreen extends Component {
+class MainMenuScreen extends Component {
 
     static propTypes = {
         navigation: PropTypes.object,
     };
 
-    constructor() {
-        super();
-        this.state = {
-            serials: []
-        };
-    };
-
-    openCamera = () => {
-        this.props.navigation.navigate('CameraScreen', {addSerial: this.addSerial.bind(this)});
-    };
-
-    addSerial(serial) {
-        this.setState(serials.push(serial));
-        alert(serials);
+    openInventoryScreen = () => {
+        this.props.navigation.navigate('InventoryScreen');
     };
 
     render() {
@@ -34,9 +22,8 @@ class InventoryScreen extends Component {
             <Container>
                 <StatusBar translucent={false}
                         barStyle="light-content"/>
-
-                <ButtonTransparentBackground buttonText={'Scan QR Code'}
-                                             onPress={this.openCamera}/>
+                <ButtonTransparentBackground buttonText={'Inventory'}
+                                                onPress={this.openInventoryScreen}/>
             </Container>
         );
     };
@@ -49,4 +36,4 @@ const styles = EStyleSheet.create({
     },
 });
 
-export default InventoryScreen;
+export default MainMenuScreen;

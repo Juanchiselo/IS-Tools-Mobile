@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, StatusBar, Text } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types';
 
@@ -35,36 +35,34 @@ import ButtonTransparentBackground from '../Components/Button';
 //     }
 //   }
 
-class LoginScreen extends Component {
+export default class LoginScreen extends Component {
 
     static propTypes = {
         navigation: PropTypes.object,
     };
 
     login = () => {
-        this.props.navigation.navigate('InventoryScreen');
+        this.props.navigation.navigate('MainMenuScreen');
     };
 
     render() {
         return (
             <Container>
                 <StatusBar translucent={false}
-                        barStyle="light-content"/>
+                           barStyle="light-content"/>
                 <KeyboardAvoidingView behavior="padding">
                     <Logo/>
                     <TextInputBottomBorder placeholder={'Username'}/>
                     <TextInputBottomBorder placeholder={'Password'}
-                                        secureTextEntry={true}/>
+                                           secureTextEntry={true}/>
                 </KeyboardAvoidingView>
                 <ButtonTransparentBackground buttonText={'Login'}
-                                                onPress={this.login}/>
+                                             onPress={this.login}/>
                 <Text style={styles.versionText}>v1.0</Text>
             </Container>
         );
     };
 };
-
-
 
 const styles = EStyleSheet.create({
     versionText: {
@@ -72,5 +70,3 @@ const styles = EStyleSheet.create({
         margin: 30,
     },
 });
-
-export default LoginScreen;

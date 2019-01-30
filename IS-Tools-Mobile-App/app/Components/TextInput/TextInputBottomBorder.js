@@ -7,6 +7,7 @@ import styles from './styles';
 const TextInputBottomBorder = ({ placeholder, secureTextEntry = false }) => (
     <View style={styles.container}>
         <TextInput placeholder={placeholder}
+                   placeholderTextColor='#a3a3a3'
                    secureTextEntry={secureTextEntry}
                    style={styles.textInput}/>
     </View>

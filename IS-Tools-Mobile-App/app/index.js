@@ -7,6 +7,7 @@ EStyleSheet.build({
   $lightRedColor: '#CF162C',
   $darkRedColor: '#4A0C13',
   $white: '#ffffff',
+  $lightGray: '#dddddd'
 });
 
 export default () => <Navigator/>;
