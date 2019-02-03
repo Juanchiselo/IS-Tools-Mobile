@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-class CameraScreen extends Component {
-    state = {
+import { addScannedSerial } from '../Actions/Inventory';
+
+class CameraScreen extends Component 
+{
+    static propTypes = {
+        dispatch: PropTypes.func,
+        serials: PropTypes.array,
+    };
+
+    state = 
+    {
         hasCameraPermission: null,
-      }
-
-      
-
-      handleBarCodeScanned = ({ type, data }) => {
-          this.props.navigation.state.params.addSerial(data);
-        }
+    }
+    
+    handleBarCodeScanned = ({ type, data }) => 
+    {
+        if(!this.props.serials.includes(data))
+          this.props.dispatch(addScannedSerial(data));
+    }
     
       async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -40,4 +50,14 @@ class CameraScreen extends Component {
 };
 };
 
-export default CameraScreen;
+const mapStateToProps = (state) =>
+{
+    const serials = state.inventory.serials;
+
+    return {
+        serials,
+    };
+};
+
+
+export default connect(mapStateToProps)(CameraScreen);

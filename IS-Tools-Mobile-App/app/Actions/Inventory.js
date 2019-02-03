@@ -1,5 +1,6 @@
-export const SCAN_QR_CODE = 'SCAN_QR_CODE';
+export const ADD_SCANNED_SERIAL = 'ADD_SCANNED_SERIAL';
 
-export const scanQrCode = () => ({
-    type: SCAN_QR_CODE,
+export const addScannedSerial = serial => ({
+    type: ADD_SCANNED_SERIAL,
+    serial,
 });

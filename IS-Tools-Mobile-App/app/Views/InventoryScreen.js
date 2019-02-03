@@ -1,39 +1,33 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StatusBar, Text } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types';
+
 import Container from '../Components/Container';
 import TextInputBottomBorder from '../Components/TextInput';
 import ButtonTransparentBackground from '../Components/Button';
-
+import { connect } from 'react-redux';
 
 class InventoryScreen extends Component {
 
     static propTypes = {
         navigation: PropTypes.object,
-    };
-
-    constructor() {
-        super();
-        this.state = {
-            serials: []
-        };
+        serials: PropTypes.array,
     };
 
     openCamera = () => {
-        this.props.navigation.navigate('CameraScreen', {addSerial: this.addSerial.bind(this)});
+        this.props.navigation.navigate('CameraScreen');
     };
-
-    addSerial(serial) {
-        this.setState(serials.push(serial));
-        alert(serials);
-    };
-
+    
     render() {
         return (
             <Container>
                 <StatusBar translucent={false}
                         barStyle="light-content"/>
+
+                <FlatList data={this.props.serials}
+                          renderItem={({ item }) => <Text>{item}</Text>}
+                          keyExtractor={item => item}/>
 
                 <ButtonTransparentBackground buttonText={'Scan QR Code'}
                                              onPress={this.openCamera}/>
@@ -42,11 +36,13 @@ class InventoryScreen extends Component {
     };
 };
 
-const styles = EStyleSheet.create({
-    versionText: {
-        color: '$white',
-        margin: 30,
-    },
-});
+const mapStateToProps = (state) =>
+{
+    const serials = state.inventory.serials;
 
-export default InventoryScreen;
+    return {
+        serials,
+    };
+};
+
+export default connect(mapStateToProps)(InventoryScreen);
