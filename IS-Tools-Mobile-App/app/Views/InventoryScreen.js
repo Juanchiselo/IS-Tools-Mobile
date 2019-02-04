@@ -1,48 +1,58 @@
-import React, { Component } from 'react';
-import { FlatList, StatusBar, Text } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { FlatList, StatusBar, Text } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
+import PropTypes from "prop-types";
 
-import Container from '../Components/Container';
-import TextInputBottomBorder from '../Components/TextInput';
-import ButtonTransparentBackground from '../Components/Button';
-import { connect } from 'react-redux';
+import Container from "../Components/Container";
+import ListItem from "../Components/List";
+import { Separator } from "../Components/List";
+import TextInputBottomBorder from "../Components/TextInput";
+import ButtonTransparentBackground from "../Components/Button";
+import { connect } from "react-redux";
 
 class InventoryScreen extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+    serials: PropTypes.array
+  };
 
-    static propTypes = {
-        navigation: PropTypes.object,
-        serials: PropTypes.array,
-    };
+  openCamera = () => {
+    this.props.navigation.navigate("CameraScreen");
+  };
 
-    openCamera = () => {
-        this.props.navigation.navigate('CameraScreen');
-    };
-    
-    render() {
-        return (
-            <Container>
-                <StatusBar translucent={false}
-                        barStyle="light-content"/>
+  handlePress = () => {
+    console.log("Row pressed");
+  };
 
-                <FlatList data={this.props.serials}
-                          renderItem={({ item }) => <Text>{item}</Text>}
-                          keyExtractor={item => item}/>
+  render() {
+    return (
+      <Container>
+        <StatusBar translucent={false} barStyle="light-content" />
 
-                <ButtonTransparentBackground buttonText={'Scan QR Code'}
-                                             onPress={this.openCamera}/>
-            </Container>
-        );
-    };
-};
+        <FlatList
+          data={this.props.serials}
+          renderItem={({ item }) => (
+            <ListItem text={item} onPress={() => alert("Pressed")} />
+          )}
+          ItemSeparatorComponent={Separator}
+          keyExtractor={item => item}
+        />
 
-const mapStateToProps = (state) =>
-{
-    const serials = state.inventory.serials;
+        <ButtonTransparentBackground
+          buttonText={"Scan QR Code"}
+          onPress={this.openCamera}
+        />
+      </Container>
+    );
+  }
+}
 
-    return {
-        serials,
-    };
+const mapStateToProps = state => {
+  const serials = state.inventory.serials;
+
+  return {
+    serials
+  };
 };
 
 export default connect(mapStateToProps)(InventoryScreen);

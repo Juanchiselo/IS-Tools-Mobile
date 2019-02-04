@@ -1,40 +1,38 @@
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createAppContainer, createStackNavigator } from "react-navigation";
 
-import LoginScreen from '../Views/LoginScreen';
-import InventoryScreen from '../Views/InventoryScreen';
-import CameraScreen from '../Views/CameraScreen';
-import MainMenuScreen from '../Views/MainMenuScreen';
+import LoginScreen from "../Views/LoginScreen";
+import MainMenuScreen from "../Views/MainMenuScreen";
+import InventoryScreen from "../Views/InventoryScreen";
+import CameraScreen from "../Views/CameraScreen";
 
 const MainStack = createStackNavigator({
-    LoginScreen: {
-        screen: LoginScreen,
-        navigationOptions: {
-            header: () => null,
-        },
-    },
-    MainMenuScreen: {
-        screen: MainMenuScreen,
-    },
-    InventoryScreen: {
-        screen: InventoryScreen,
-    },
+  LoginScreen: {
+    screen: LoginScreen,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  MainMenuScreen: {
+    screen: MainMenuScreen
+  },
+  InventoryScreen: {
+    screen: InventoryScreen
+  }
 });
 
 const RootStack = createStackNavigator(
-    {
-      Main: {
-        screen: MainStack,
-      },
-      CameraScreen: {
-        screen: CameraScreen,
-      },
+  {
+    Main: {
+      screen: MainStack
     },
-    {
-      mode: 'modal',
-      headerMode: 'none',
+    CameraScreen: {
+      screen: CameraScreen
     }
-  );
+  },
+  {
+    mode: "modal",
+    headerMode: "none"
+  }
+);
 
-const App = createAppContainer(RootStack);
-
-export default App;
+export default createAppContainer(RootStack);
